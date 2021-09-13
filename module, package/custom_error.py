@@ -1,3 +1,3 @@
-class InvalidLenghtError(Exception):
+class InvalidLengthError(Exception):
     def __init__(self, message):
-        super(InvalidLenghtError, self).__init__()
+        super(InvalidLengthError, self).__init__()

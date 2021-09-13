@@ -1,5 +1,5 @@
 import random
-from custom_error import InvalidLenghtError
+from custom_error import InvalidLengthError
 
 # 정답 만들기
 def make_answer():
@@ -36,7 +36,9 @@ while True:
         continue
 
     if len(guess) != len(answer):
-        raise InvalidLengthError('정답의 길이와 다름니다.')
+        # raise InvalidLengthError('정답의 길이와 다름니다.')
+        print(f'정답의 길이와 다름니다. {len((answer))} 자리')
+        continue
 
     # strike, ball 판정
     strike, ball = check(guess, answer)
