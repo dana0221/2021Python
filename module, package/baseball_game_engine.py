@@ -1,4 +1,5 @@
 import random
+from custom_error import InvalidLenghtError
 
 # 정답 만들기
 def make_answer():
@@ -28,9 +29,14 @@ while True:
     guess = input('세 자리 숫자를 입력하세요')
 
     # 숫자인지 판정
-    guess_int = int(guess)
+    try:
+        guess_int = int(guess)
+    except ValueError as e:
+        print('숫자만 입력하세요')
+        continue
 
-
+    if len(guess) != len(answer):
+        raise InvalidLengthError('정답의 길이와 다름니다.')
 
     # strike, ball 판정
     strike, ball = check(guess, answer)
