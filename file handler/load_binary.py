@@ -1,4 +1,7 @@
-with open('binary.bin', 'rb') as f:
+with open('text.bin', 'wb') as f:
+    f.write(b'\xea\xb0\x80')
+
+with open('text.bin', 'r', encoding='utf-8') as f:
     data = f.read()
 
 print(data)
