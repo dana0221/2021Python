@@ -5,6 +5,9 @@ f.close()
 
 print(data)
 
+with open('text.txt', 'r', encoding='utf-8') as f:
+    data = f.read()
+
 print('-'*15)
 
 # 한 줄씩 읽기
