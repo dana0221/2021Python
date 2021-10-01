@@ -31,3 +31,15 @@ f.close()
 for line in lines:
     print(line.rstrip())
 
+print('_'*15)
+
+# quiz
+# 이름 : 양가영\t좋아하는 색 : 보라색
+# 이름 : 양가영\t좋아하는 색 : 검정색
+
+f = open('text.txt', 'r', encoding='utf-8')
+lines = f.readlines()
+f.close()
+
+for line in lines:
+    print('이름 : ' + line.rstrip()[:3] + '\t좋아하는 색 : ' + line.rstrip()[-3:])
