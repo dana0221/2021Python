@@ -22,6 +22,7 @@ def check(guess, answer):
 
 answer = make_answer()
 
+cnt = 0
 
 # 무한반복
 while True:
@@ -42,9 +43,10 @@ while True:
 
     # strike, ball 판정
     strike, ball = check(guess, answer)
+    cnt += 1
 
     # 출력
-    print(f'{guess} | strike : {strike}, ball : {ball}')
+    print(f'{guess} | strike : {strike}, ball : {ball}\ttry : {cnt}')
 
     # 정답 == 입력숫자
     if answer == guess:
