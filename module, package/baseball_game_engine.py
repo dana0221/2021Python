@@ -21,13 +21,47 @@ def check(guess, answer):
     return strike, ball
 
 answer = make_answer()
+print(answer)
+
+def save_history(answer, cnt, name):
+    with open('baseball_history.txt', 'a', encoding='utf-8') as f:  # 기존의 내용에서 추가
+        f.write(f'{answer}:{cnt}:{name}\n')
+
+def load_history():
+    cnt_name = {}
+
+    with open('baseball_history.txt', 'r', encoding='utf-8') as f:
+        print('-----history-----')
+
+        while True:
+            # 한 줄 읽기
+            line = f.readline()
+
+            # 읽을 내용 없으면 끝내기
+            if line == '':
+                break
+
+            # \n 지우기
+            print(line.rstrip())    #answer:cnt:name
+            line = line.rstrip()    # answer:cnt:name의 데이터
+            data = line.split(':')
+            cnt_name[data[1]] = data[2]     # {3: name}
+
+        cnt_name = sorted(cnt_name.items())
+        return cnt_name[:3]
 
 cnt = 0
 
 # 무한반복
 while True:
     # 숫자 물어보기
-    guess = input('세 자리 숫자를 입력하세요')
+    guess = input('세 자리 숫자를 입력하세요(t:history)')
+
+    # t 입력 시 불러오기(top3)
+    if guess == 't':
+        top3 = load_history()
+        print(top3)
+        continue
 
     # 숫자인지 판정
     try:
@@ -51,4 +85,13 @@ while True:
     # 정답 == 입력숫자
     if answer == guess:
         print('정답입니다.')
+
+        # 저장하기(정답, 시도횟수, 이름)
+        name = input('이름 : ')
+        save_history(answer, cnt, name)
+
+        # 게임기록 불러오기(top3)
+        top3 = load_history()
+        print(top3)
+
         break;
