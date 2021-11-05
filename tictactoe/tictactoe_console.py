@@ -23,7 +23,7 @@ class TictactoeConsole:
             # set_winner
             winner = self.game_engine.set_winner()
 
-            # 승자가 있거나 무승부일 경우 게임 끝, 결과 출력
+            # 승자가 있거나 무승부일 경우 게임 끝, 결과 출력x
             if winner == 'X' or winner == 'O':
                 print(f'🎉{winner} 승리🎉')
                 break;
