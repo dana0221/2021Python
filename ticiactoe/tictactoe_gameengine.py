@@ -59,10 +59,12 @@ class TictactoeGameEngine:
             return self.turn
 
         # 무승부 결정
-        if self.board[0] != '.' and self.board[1] != '.' and self.board[2] != '.' and \
-           self.board[3] != '.' and self.board[4] != '.' and self.board[5] != '.' and \
-           self.board[6] != '.' and self.board[7] != '.' and self.board[8] != '.':
-            return print('무승부')
+        # if self.board[0] != '.' and self.board[1] != '.' and self.board[2] != '.' and \
+        #    self.board[3] != '.' and self.board[4] != '.' and self.board[5] != '.' and \
+        #    self.board[6] != '.' and self.board[7] != '.' and self.board[8] != '.':
+        #     return 'd'
+        if not '.' in self.board:
+            return 'd'
 
     def change_turn(self):
         # if self.turn == 'X':
