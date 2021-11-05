@@ -1,34 +1,89 @@
-class TictactoGameEngine:
+class TictactoeGameEngine:
     def __init__(self):
-        self.borad = list['.' * 9]  # ['.', '.', '.', '.', '.', '.', '.', '.', '.',]
+        self.board = list('.' * 9)  # ['.', '.', '.', '.', '.', '.', '.', '.', '.',]
+        self.turn = 'X'
 
-    def show_borad(self):
-        print(self.borad)
+    def show_board(self):
+        # print('  '.join(self.board[0:3]))
+        # print('  '.join(self.board[3:6]))
+        # print('  '.join(self.board[6:9]))
+
+        for i, v in self.board:
+            print(v + '  ', end='') # 줄바꿈 방지
+            if i % 3 == 2:
+                print()
 
     def set(self, row, col):
-        pass
+        # self.board[(row * 3 - 3) + (col - 1)] = self.turn
+        index = (row - 1) * 3 + (col - 1)
+        self.board[index] = self.turn
+
+    def position_to_index(self, row, col):
+        return (row - 1) * 3 + (col - 1)
 
     def set_winner(self):
-        # 입력 값 : self.borad 값을 가져옴
-        # 출력 값 :
         # 이기는 법 : 가로3, 세로3, 대각선3
-        # 끝나는 경우 : 무승부(승자가 없는 상태로 놓을 자리가 없음), 승자 결정(승자가 있음)
-        # 대각선과 끝나는 경우 코딩
-        pass
+        # 가로
+        for row in range(1, 3 + 1):
+            if self.board[self.position_to_index(row, 1)] \
+                    == self.board[self.position_to_index(row, 2)] \
+                    == self.board[self.position_to_index(row, 3)] \
+                    == self.turn:
+                return self.turn
+
+        # 세로
+        for col in range(1, 3 + 1):
+            if self.board[self.position_to_index(1, col)] \
+                    == self.board[self.position_to_index(2, col)] \
+                    == self.board[self.position_to_index(3, col)] \
+                    == self.turn:
+                return self.turn
+
+        # 대각선
+        # /
+        # if self.board[2] == 'X' and self.board[4] == 'X' and self.board[6] == 'X':
+        #     return print('X 승리')
+        #
+        # if self.board[2] == 'O' and self.board[4] == 'O' and self.board[6] == 'O':
+        #     return print('O 승리')
+        if self.board[self.position_to_index(1, 3)] == self.board[self.position_to_index(2, 2)] == self.board[self.position_to_index(3, 1)] == self.turn:
+            return self.turn
+
+        # \
+        # if self.board[0] == 'X' and self.board[4] == 'X' and self.board[8] == 'X':
+        #     return print('X 승리')
+        #
+        # if self.board[0] == 'O' and self.board[4] == 'O' and self.board[8] == 'O':
+        #     return print('O 승리')
+        if self.board[self.position_to_index(1, 1)] == self.board[self.position_to_index(2, 2)] == self.board[self.position_to_index(3, 3)] == self.turn:
+            return self.turn
+
+        # 무승부 결정
+        if self.board[0] != '.' and self.board[1] != '.' and self.board[2] != '.' and \
+           self.board[3] != '.' and self.board[4] != '.' and self.board[5] != '.' and \
+           self.board[6] != '.' and self.board[7] != '.' and self.board[8] != '.':
+            return print('무승부')
 
     def change_turn(self):
-        pass
+        # if self.turn == 'X':
+        #     self.turn == 'O'
+        # else:
+        #     self.turn == 'X'
+
+        self.turn = 'O' if self.turn == 'X' else 'X'
 
 
 if __name__ == '__main__':
-    game_engine = TictactoGameEngine()
-    game_engine.show_borad()
+    game_engine = TictactoeGameEngine()
+    game_engine.show_board()  # ...\n...\n...
     game_engine.set(2, 2)
-    game_engine.show_borad()
+    game_engine.show_board()  # ['.', '.', '.', '.', 'X', '.', '.', '.', '.']
     game_engine.set(2, 1)
     game_engine.set(2, 3)
-    game_engine.show_borad()
-    game_engine.borad = ['.', '.', '.', 'X', 'X', 'X', '.', '.', '.',]
-    game_engine.set_winner()
+    game_engine.show_board()  # ['.', '.', '.', 'X', 'X', 'X', '.', '.', '.']
+    game_engine.board = ['.', '.', '.', 'X', 'X', 'X', '.', '.', '.']
+    game_engine.set_winner()  # '-'  -> 'X'
     game_engine.change_turn()
-    print(game_engine.turn)
+    print(game_engine.turn)  # 'O'
+    game_engine.change_turn()
+    print(game_engine.turn)  # 'X'
