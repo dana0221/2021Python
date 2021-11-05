@@ -8,8 +8,8 @@ class TictactoeGameEngine:
         # print('  '.join(self.board[3:6]))
         # print('  '.join(self.board[6:9]))
 
-        for i, v in self.board:
-            print(v + '  ', end='') # 줄바꿈 방지
+        for i, v in enumerate(self.board):
+            print(v + '  ', end='')  # 줄바꿈 방지
             if i % 3 == 2:
                 print()
 
